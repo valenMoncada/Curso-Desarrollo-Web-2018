@@ -22,13 +22,15 @@
                 <span class="menu-open icono-grande" id="btn-menu-open">
                     <i class="fe fe-list-bullet"></i>
                 </span>
+                <!--Toggle es como un switch-->
                 <span class="nav-toggle icono-grande" id="btn-nav-toggle">
                     <!--icono-->
                     <i class="fe fe-bar"></i>
                 </span>
-                <ul class="nav-links lista-links">
+                <ul class="nav-links lista-links" id="nav-links">
                     <li><a href="#">Inicio</a></li>
                     <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Dudas</a></li>
                     <li><a href="#">Nueva Actividad</a></li>
                 </ul>
             </nav>
@@ -37,12 +39,14 @@
             <span class="menu-close" id="btn-menu-close">
                 <i class="fe fe-close"></i>
             </span>
-            <ul class="menu-links lista-links">
+            <ul class="menu-links lista-links" id="menu-links">
+                <!-- NO SON NECESARIOS
                 <li><a href="#">1</a></li>
                 <li><a href="#">2</a></li>
                 <li><a href="#">3</a></li>
                 <li><a href="#">4</a></li>
                 <li><a href="#">5</a></li>
+                -->
             </ul>
         </div>
         <section class="main">
@@ -52,13 +56,15 @@
                     temporibus in vitae animi sapiente?</p>
             </div>
             <div class="contenedor-iframe">
-                <iframe id="iframe" src="https://angular.io"></iframe>
+                <iframe id="iframe" name="main-iframe" src="https://angular.io"></iframe>
             </div>
         </section>
         <footer class="footer">
             <p>Hecho por Valentina Moncada Salazar - &copy; 2018</p>
         </footer>
     </div>
+
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>

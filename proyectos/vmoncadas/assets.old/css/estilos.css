@@ -108,6 +108,12 @@ solo colores o medidas, solo valores finales*/
     /* color del texto*/
     color: var(--c-oscuro);
 }
+.nav .nav-links{
+    display: none;
+}
+.nav .nav-links.mostrar{
+    display: block;
+}
 .nav .nav-links li{
     text-align: center;
     margin: 0 auto;

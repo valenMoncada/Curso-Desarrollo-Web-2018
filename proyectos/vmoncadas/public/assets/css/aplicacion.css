@@ -1,0 +1,293 @@
+/* Importar fuente personalizada
+Los import siempre deben ir al principio */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+/*Normalizar documento*/
+*{ 
+    /*margenes, espacio definido despues de su borde*/
+    margin: 0; 
+    /*definir el espacio entre mi contenido y su borde*/
+    padding: 0; 
+    /*todos los documentos al definir la anchura queda dentro de lo definido*/
+    box-sizing: border-box; 
+}
+
+body{
+    font-family: 'Lato', 'Arial', sans-serif;
+}
+
+/*Raiz del documento, se definen las variables globales CSS, 
+solo colores o medidas, solo valores finales*/
+:root{ 
+    /*Variables de comoles principales*/
+    --c-primario: #E6B098;
+    --c-secundario: #CC4452;
+    --c-terciario: #723147;
+    --c-claro:#F9E4AD;
+    --c-oscuro: #31152B;
+
+    /* Dimensión del iframe */
+    --iframe-width: 650px;
+    --iframe-height: 450px;
+}
+
+/* =========> Layout de la aplicación con CSS grid <========== */
+
+.contenedor{
+    background: var(--c-oscuro);
+    /*Igual de lardo al dispositivo Viewport Width*/
+    width: 100vw; 
+    /* ViewportHeight*/
+    height: 100vh; 
+    display: grid;
+    grid-template-columns: 100%;
+    /*fr quiere decir el espacio restante, auto para que se acomode conforme al contenido*/
+    grid-template-rows: auto 1fr 50px;
+    overflow-x: hidden; 
+}
+
+.header{
+    background: var(--c-secundario);
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.menu{
+    background: var(--c-terciario);
+}
+
+.main{
+    background: var(--c-claro);
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+.footer{
+    background: var(--c-secundario);
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+}
+/* =================== */
+
+/* Estilos para el contenido principal */
+.main{
+    /* 1em quiere decir 1 vez el tamaño de la letra */
+    padding: 1em;
+}
+.main .instruccion{
+    width: 90%;
+    margin: 0 auto;
+    background: var(--c-primario);
+    padding: 5px;
+    /* Debe ir en pixeles y coloca las escinas redondas*/
+    border-radius: 10px;
+}
+.main .instruccion p{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    /* Letra negrita*/
+    font-weight: bold;
+}
+.main .contenedor-iframe{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    text-align: center;
+    overflow-x: auto;
+    background: var(--c-oscuro);
+}
+.main .contenedor-iframe iframe{
+    width: var(--iframe-width);
+    height: var(--iframe-height);
+}
+
+/* Estilos para la barra de navegación */
+/* Llamamos directamente al nav porque solo hay uno*/
+.nav *{
+    /* color del texto*/
+    color: var(--c-oscuro);
+}
+.nav .nav-links{
+    display: none;
+}
+.nav .nav-links.mostrar{
+    display: block;
+}
+.nav .nav-links li{
+    text-align: center;
+    margin: 0 auto;
+    /* Cuando cambie algo lo haga en un tiempo determinado*/
+    transition: background 0.5s;
+}
+.nav .nav-links li a{
+    display: block;
+    padding: 5px;
+    font-weight: bold;
+}
+.nav .menu-open{
+    display: inline-block;
+    /* Orden arriba derecha abajo izquierda*/
+    margin: 5px auto 5px 15px;
+}
+.nav{
+    position: relative;
+}
+.nav .nav-toggle{
+    position: absolute;
+    top: 5px;
+    right: 15px;
+}
+/* Cuando el mouse este por encima*/
+.nav .nav-links li:hover{
+    background: var(--c-terciario);
+}
+
+/*Estilo para el pie de pagina*/
+.footer{
+    color: white;
+    font-weight: bold;
+    /*Centrar contenido del footer*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Estilo para el menu lateral*/
+.menu{
+    position: fixed;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    border-right: 1px solid var(--c-oscuro);
+    left: -300px;
+    transition: left 0.3s ease-in-out;
+}
+.menu.mostrar{
+    left: 0;
+}
+.menu .menu-links li{
+    border-bottom: 1px solid var(--c-primario);
+    transition: background-color 0.5s;
+}
+.menu .menu-links li:hover{
+    background: var(--c-primario);
+}
+.menu .menu-links li a{
+    display: block;
+    padding: 5px 10px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+.menu .menu-close{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    right: -30px;
+    background: red;
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+.menu .menu-close:hover{
+    background: rgb(211, 0, 0);
+}
+
+/* Responsive design: Estilos para dispositivos de escritorio*/
+@media screen and (min-width: 900px){
+    /*Removemos los botones para moviles de la barra de navegacion*/
+    .nav .menu-open, .nav .nav-toggle{
+        display: none;
+    }
+
+    /*Adecuamos la barra de navegacion y su contenido*/
+    .nav .nav-links{
+        height: 50px;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .nav .nav-links li{
+        height: 80%;
+        margin: 0;
+        margin-left: 20px;
+        border: 1px solid var(--c-terciario);
+        border-radius: 10px;
+    }
+    .nav .nav-links li a{
+        height: 100%;
+        padding: 0 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /*Modificamos el layout de la aplicacion con CSS grid*/
+    .contenedor{
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: auto 1fr 50px;
+    }
+
+    .header{
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+    }
+
+    .menu{
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+    }
+
+    .main{
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+
+    .footer{
+        grid-column: 1 / 3;
+        grid-row: 3 / 4;
+    }
+
+    /* Reiniciamos ciertas propiedades del menu lateral para que cumpla con el layout*/
+    .menu{
+        position: static;
+        width: auto;
+        height: auto;
+        transition: none;
+        border-top: 1px solid var(--c-terciario);
+        border-bottom: 1px solid var(--c-terciario);
+    }
+    /* Ocultamos el boton para cerrar el menu lateral*/
+    .menu .menu-close{
+        display: none;
+    }
+
+    /*Restringimos el tamaño del contenido principal*/
+    .main .instruccion, .main .contenedor-iframe{
+        width: var(--iframe-width);
+    }
+}
+
+/* ==============> UTILIDADES <==============*/
+/* Normalizar listas y links */
+.lista-links{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.lista-links li a{
+    /*Para que no aparezca la linea debajo que indica q es un link*/
+    text-decoration: none; 
+}
+
+/* Iconos grandes */
+.icono-grande{
+    font-size: 25px;
+    /*Cuando pase por encima el mouse, pointer es manito*/
+    cursor: pointer;
+}
