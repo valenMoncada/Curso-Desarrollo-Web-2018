@@ -19,7 +19,18 @@ class ActividadRepo extends RepositorioAbstracto {
         return $query->fetch();
     }
 
-    //public function consultarActividades
+    public function consultarActividades (){
+        return [
+            [ //mockin simular que hay una base de datos
+                'id' => 1,
+                'nombre' => 'Actividad normal',
+                'instruccion' => 'asdfg',
+                'descripcion' => 'asfg',
+                'categoria_id' => 1,
+                'ruta_archivo' => 'public/assets/uploads/actividades/actvididad-normal/index.html'
+            ]
+        ];
+    }
 
     //public function contarActividadesPorCategoria
 

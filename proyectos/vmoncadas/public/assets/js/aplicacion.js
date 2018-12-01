@@ -4,13 +4,15 @@ var btnMenuClose = document.getElementById("btn-menu-close");
 var btnNavToggle = document.getElementById("btn-nav-toggle");
 var navLinks = document.getElementById("nav-links");
 
-
 /* La función se manda sin paréntesis */
 btnMenuOpen.addEventListener("click", mostrarMenuLateral);
 btnMenuClose.addEventListener("click", ocultarMenuLateral);
 btnNavToggle.addEventListener("click", toggleNavLinks);
 /* El resize es para cuando se cambia el tamaño */
 window.addEventListener("resize", arreglarNavLinks);
+
+//Cargar enlaces de actividades con AJAX
+document.addEventListener("DOMContentLoaded", cargarDatos);
 
 function mostrarMenuLateral() {
     /* Agregamos la clase mostrar creada en CSS para que se muestre el menu */
@@ -33,45 +35,36 @@ function arreglarNavLinks() {
 }
 
 function cargarDatos() {
-    var datos = [
-        {
-            /** El // determina si es http o https */
-            url: "//unal.edu.co",
-            nombre: "UNAL",
-            instruccion: "Instruccion UNAL"
-        },
-        {
-            /** El // determina si es http o https */
-            url: "//css-tricks.com",
-            nombre: "CSS Tricks",
-            instruccion: "Instruccion CSS"
-        },
-        {
-            url: "assets/uploads/actividades/actividad-normal/index.html",
-            nombre: "Determinar operación",
-            instruccion: "Fijate en los números y selecciona la operación que da el resultado"
-        },
-        {
-            url: "assets/uploads/actividades/actividad-canvas/index.html",
-            nombre: "Actividad Canvas",
-            instruccion: "Organiza los pericos"
-        },
-        {
-            url: "assets/uploads/actividades/actividades001-1/index.html",
-            nombre: "Actividad1",
-            instruccion: "Organiza los pericos"
-        },
-    ];
-    return datos;
+    var url = menuLateral.dataset.url;
+    var datos = [];
+    axios.get(url)
+        .then(function (res) {
+            var actividades = res.data.actividades;
+            if (actividades.length > 0) {
+                actividades.forEach(function (actividad) {
+                    var obj = {
+                        url: actividad.rutaArchivo,
+                        nombre: actividad.nombre,
+                        instruccion: actividad.instruccion
+                    };
+                    datos.push(obj);
+                });
+            }
+        }).catch(function (err) {
+            // no me cumple
+            console.log(err.response);
+        }).finally(function () {
+            generarLinks(datos);
+        });
+
 }
 
-function generarLinks() {
+function generarLinks(links) {
     var menuLinks = document.getElementById("menu-links");
     menuLinks.innerHTML = "";
 
-    var links = cargarDatos();
     if (links.length > 0) {
-        //Legaron datos
+        //Llegaron datos
         for (var i = 0; i < links.length; i++) {
             var texto = document.createTextNode(links[i].nombre);
             //"a" porque es un link
@@ -98,4 +91,7 @@ function generarLinks() {
     }
 }
 
-generarLinks();
+//Recibir puntaje desde la actividad
+function enviarPuntaje(puntaje) {
+    alert('Tu puntaje es:' + puntaje*100);
+}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,27 @@
     <title>Actividades Educativas</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
+
 <body>
     <div class="contenedor">
         <!--Estructura de la actividad-->
+        <div class="caja">
+            <span class="num" id="numero1"></span>
+            <span class="num" id="numero2"></span>
+            <span class="num" id="numero3"></span>
+
+            <span class="op" id="unid">UNIDADES:</span>
+            <span class="op" id="dec">DECENAS:</span>
+            <span class="op" id="cent">CENTENAS:</span>
+
+            <input class="estilo" id="unidades" type="number" min="0" max="9" oninput="validar();">
+            <input class="estilo" id="decenas" type="number" min="0" max="9">
+            <input class="estilo" id="centenas" type="number" min="0" max="9">
+        </div>
         <button id="btn-continuar">Continuar</button>
         <a href="#" id="btn-audio"><img src="botonAudio.png" alt="botón audio" height="30"></a>
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
